@@ -53,7 +53,7 @@ export default function Resume() {
                 </div>
 
                 <div className="border-l-2 border-zinc-200 pl-4">
-                  <p className="text-xs text-zinc-400 mb-1">2023 – 2024</p>
+                  <p className="text-xs text-zinc-400 mb-1">2022 – 2024</p>
 
                   <h4 className="font-semibold text-zinc-900">
                     Govt. Vocational Higher Secondary School, Koppam (GVHSS
