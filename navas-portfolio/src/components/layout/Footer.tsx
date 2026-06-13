@@ -59,11 +59,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-
-        <div className="border-t border-zinc-100 pt-6 flex flex-col sm:flex-row justify-between items-center gap-2">
-          <p className="text-xs text-zinc-400">© {new Date().getFullYear()} Muhammed Navas. All rights reserved.</p>
-          <p className="text-xs text-zinc-400">Built with React, TypeScript &amp; Framer Motion.</p>
-        </div>
       </div>
     </footer>
   );

@@ -55,7 +55,7 @@ export default function Hero() {
               className="text-base text-zinc-500 leading-relaxed mb-8 max-w-md mx-auto lg:mx-0"
             >
               I build scalable full-stack web applications using React, Node.js,
-              Express, MongoDB and TypeScript — with a focus on clean
+              Express, MongoDB and TypeScript with a focus on clean
               architecture and modern development practices.
             </motion.p>
 

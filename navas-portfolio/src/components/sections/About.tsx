@@ -68,7 +68,7 @@ export default function About() {
             I'm a MERN stack developer passionate about building scalable
             applications with strong foundations. I work daily with React,
             TypeScript, Node.js, Express.js, and MongoDB, and have shipped
-            enterprise platforms — from a complete gym management ERP to a
+            enterprise platforms from a complete gym management ERP to a
             supplement e-commerce platform. I care deeply about software
             architecture, clean code, and creating interfaces that feel
             effortless.
