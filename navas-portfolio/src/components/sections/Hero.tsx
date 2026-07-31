@@ -1,18 +1,8 @@
 import { motion } from "framer-motion";
 import { SOCIAL } from "@/data/portfolio";
-import { Mail } from "lucide-react";
-
-const GH = () => (
-  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
-    <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
-  </svg>
-);
-
-const LI = () => (
-  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
-    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-  </svg>
-);
+import { Mail, Download, ChevronDown } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FlipWords } from "@/components/ui/flip-words";
 
 export default function Hero() {
   const scrollTo = (id: string) =>
@@ -38,14 +28,22 @@ export default function Hero() {
             </motion.h1>
 
             {/* Title */}
-            <motion.h2
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
-              className="text-3xl sm:text-4xl font-extrabold text-zinc-400 leading-[1.15] tracking-tight mb-6"
+              className="text-3xl sm:text-4xl font-extrabold text-zinc-400 leading-[1.15] tracking-tight mb-6 h-12 flex items-center justify-center lg:justify-start"
             >
-              MERN Stack Developer.
-            </motion.h2>
+              <FlipWords
+                words={[
+                  "MERN Stack Developer",
+                  "Full-Stack Engineer",
+                  "React Developer",
+                  "Node.js Developer",
+                ]}
+                className="text-zinc-400 px-0 ml-[-8px]"
+              />
+            </motion.div>
 
             {/* Description */}
             <motion.p
@@ -55,77 +53,76 @@ export default function Hero() {
               className="text-base text-zinc-500 leading-relaxed mb-8 max-w-md mx-auto lg:mx-0"
             >
               I build scalable full-stack web applications using React, Node.js,
-              Express, MongoDB and TypeScript — with a focus on clean
-              architecture and modern development practices.
+              Express, MongoDB and TypeScript with a focus on clean architecture
+              and modern development practices.
             </motion.p>
 
-            {/* CTAs */}
+            {/* CTA + Social */}
+            <div className="flex justify-center lg:justify-start">
+              <div className="inline-flex flex-col items-center">
+                {/* Buttons */}
+                <motion.div
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.9, delay: 0.4, ease: "easeOut" }}
+                  className="flex flex-wrap justify-center gap-4"
+                >
+                  <button
+                    onClick={() => scrollTo("projects")}
+                    className="bg-black dark:bg-white text-white dark:text-black font-semibold px-8 py-3.5 rounded-full hover:bg-black hover:text-white transition-all duration-300 hover:scale-105 shadow-xl flex items-center gap-2"
+                  >
+                    {" "}
+                    View Projects{" "}
+                    <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+                      {" "}
+                      →{" "}
+                    </span>{" "}
+                  </button>
 
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.4, ease: "easeOut" }}
-              className="flex flex-wrap gap-3 mb-8 justify-center lg:justify-start"
-            >
-              <button
-                onClick={() => scrollTo("projects")}
-                className="btn-black group flex items-center gap-1"
-              >
-                View Projects
-                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
-              </button>
+                  <a
+                    href="/resume.pdf"
+                    download
+                    className="bg-black text-white font-semibold px-8 py-3.5 rounded-full shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl flex items-center gap-2"
+                  >
+                    <Download size={18} />
+                    Download Resume
+                  </a>
+                </motion.div>
 
-              <button
-                onClick={() => scrollTo("contact")}
-                className="btn-outline flex items-center gap-1.5"
-              >
-                <Mail size={15} /> Contact me
-              </button>
-            </motion.div>
+                {/* Social Icons */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.55, ease: "easeOut" }}
+                  className="flex items-center justify-center gap-5 mt-6"
+                >
+                  <a
+                    href={SOCIAL.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-full border-2 border-black bg-white text-black flex items-center justify-center shadow-lg transition-all duration-300 hover:bg-black hover:text-white hover:scale-110 hover:shadow-xl"
+                  >
+                    <FaGithub size={24} />
+                  </a>
 
-            {/* Social + location */}
+                  <a
+                    href={SOCIAL.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-full border-2 border-black bg-white text-black flex items-center justify-center shadow-lg transition-all duration-300 hover:bg-black hover:text-white hover:scale-110 hover:shadow-xl"
+                  >
+                    <FaLinkedin size={24} />
+                  </a>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.55, ease: "easeOut" }}
-              className="flex items-center gap-4 text-zinc-400 justify-center lg:justify-start"
-            >
-              <a
-                href={SOCIAL.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-zinc-700 transition-colors duration-300 hover:scale-110 transform"
-              >
-                <GH />
-              </a>
-
-              <a
-                href={SOCIAL.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-zinc-700 transition-colors duration-300 hover:scale-110 transform"
-              >
-                <LI />
-              </a>
-
-              <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=muhammednavas382@gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-zinc-700 transition-colors duration-300 hover:scale-110 transform"
-              >
-                <Mail size={20} />
-              </a>
-
-              <span className="text-zinc-300">·</span>
-
-              <span className="text-xs font-medium text-zinc-400">
-                Kerala, India
-              </span>
-            </motion.div>
+                  <a
+                    href="mailto:muhammednavas382@gmail.com"
+                    className="w-12 h-12 rounded-full border-2 border-black bg-white text-black flex items-center justify-center shadow-lg transition-all duration-300 hover:bg-black hover:text-white hover:scale-110 hover:shadow-xl"
+                  >
+                    <Mail size={24} />
+                  </a>
+                </motion.div>
+              </div>
+            </div>
           </div>
 
           {/* ── RIGHT: Circular Photo ── */}
@@ -172,6 +169,24 @@ export default function Hero() {
           </motion.div>
         </div>
       </div>
+      {/* Scroll Down */}
+      <motion.button
+        initial={{ opacity: 0, y: -10 }}
+        animate={{
+          opacity: 1,
+          y: [0, 8, 0],
+        }}
+        transition={{
+          delay: 1.2,
+          duration: 1.8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        onClick={() => scrollTo("about")}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full border-2 border-zinc-300 bg-white shadow-lg flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all duration-300 hover:scale-110"
+      >
+        <ChevronDown size={28} strokeWidth={2.2} />
+      </motion.button>
 
       {/* Keyframe for ring rotation */}
 

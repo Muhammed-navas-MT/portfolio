@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { fadeUp, stagger } from "@/lib/motion";
 import SectionWrapper, { SectionLabel } from "@/components/ui/SectionWrapper";
 import { SOCIAL } from "@/data/portfolio";
+import { Phone } from "lucide-react";
 
 const GH = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
@@ -23,10 +24,10 @@ const Mail = () => (
 
 export default function Contact() {
   return (
-    <SectionWrapper id="contact" bg="subtle" >
-      <motion.div variants={stagger} className="max-w-3xl mx-auto text-center">
+    <SectionWrapper id="contact" bg="subtle">
+      <motion.div variants={stagger} className="mx-auto max-w-5xl text-center">
         <motion.div variants={fadeUp}>
-          <SectionLabel text="CONTACT" />
+          <SectionLabel text="GET IN TOUCH" />
 
           <h2 className="text-4xl sm:text-5xl font-extrabold text-zinc-900 leading-tight tracking-tight mt-3 mb-4">
             Let's build something great.
@@ -40,47 +41,95 @@ export default function Contact() {
         </motion.div>
 
         <motion.div
-          variants={fadeUp}
-          className="mt-10 grid sm:grid-cols-3 gap-4"
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
         >
-          <a
+          {/* Email */}
+          <motion.a
+          variants={fadeUp}
+            whileHover={{ y: -8 }}
+            transition={{ duration: 0.25 }}
             href="https://mail.google.com/mail/?view=cm&fs=1&to=muhammednavas382@gmail.com"
-            className="card bg-white p-5 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+            className="group rounded-3xl border border-zinc-200 bg-white p-7 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl"
           >
-            <div className="flex flex-col items-center gap-3">
-              <Mail />
-              <span className="font-semibold text-zinc-900">Email</span>
-              <span className="text-sm text-zinc-500 break-all">
-                {SOCIAL.email}
-              </span>
-            </div>
-          </a>
+            <div className="flex flex-col items-center text-center">
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white">
+                <Mail />
+              </div>
 
-          <a
+              <h3 className="text-lg font-bold text-zinc-900">Email</h3>
+
+              <p className="mt-2 break-all text-sm text-zinc-500">
+                {SOCIAL.email}
+              </p>
+            </div>
+          </motion.a>
+
+          {/* GitHub */}
+          <motion.a
+          variants={fadeUp}
+            whileHover={{ y: -8 }}
+            transition={{ duration: 0.25 }}
             href={SOCIAL.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="card bg-white p-5 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+            className="group rounded-3xl border border-zinc-200 bg-white p-7 shadow-sm transition-all duration-300 hover:border-zinc-300 hover:shadow-xl"
           >
-            <div className="flex flex-col items-center gap-3">
-              <GH />
-              <span className="font-semibold text-zinc-900">GitHub</span>
-              <span className="text-sm text-zinc-500">Muhammed-navas-MT</span>
-            </div>
-          </a>
+            <div className="flex flex-col items-center text-center">
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-zinc-900 group-hover:text-white">
+                <GH />
+              </div>
 
-          <a
+              <h3 className="text-lg font-bold text-zinc-900">GitHub</h3>
+
+              <p className="mt-2 text-sm text-zinc-500">Muhammed-navas-MT</p>
+            </div>
+          </motion.a>
+
+          {/* LinkedIn */}
+          <motion.a
+          variants={fadeUp}
+            whileHover={{ y: -8 }}
+            transition={{ duration: 0.25 }}
             href={SOCIAL.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="card bg-white p-5 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+            className="group rounded-3xl border border-zinc-200 bg-white p-7 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl"
           >
-            <div className="flex flex-col items-center gap-3">
-              <LI />
-              <span className="font-semibold text-zinc-900">LinkedIn</span>
-              <span className="text-sm text-zinc-500">in/navasmt</span>
+            <div className="flex flex-col items-center text-center">
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-sky-50 text-sky-600 transition-all duration-300 group-hover:scale-110 group-hover:bg-sky-600 group-hover:text-white">
+                <LI />
+              </div>
+
+              <h3 className="text-lg font-bold text-zinc-900">LinkedIn</h3>
+
+              <p className="mt-2 text-sm text-zinc-500">
+                in/navasmt
+              </p>
             </div>
-          </a>
+          </motion.a>
+
+          {/* Phone */}
+          <motion.a
+          variants={fadeUp}
+            whileHover={{ y: -8 }}
+            transition={{ duration: 0.25 }}
+            href="tel:+917909173076"
+            className="group rounded-3xl border border-zinc-200 bg-white p-7 shadow-sm transition-all duration-300 hover:border-emerald-200 hover:shadow-xl"
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 transition-all duration-300 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white">
+                <Phone size={22} />
+              </div>
+
+              <h3 className="text-lg font-bold text-zinc-900">Phone</h3>
+
+              <p className="mt-2 text-sm text-zinc-500">+91 7909173076</p>
+            </div>
+          </motion.a>
         </motion.div>
       </motion.div>
     </SectionWrapper>

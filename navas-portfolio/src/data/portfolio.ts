@@ -51,7 +51,12 @@ export const SKILLS = {
 
   DevOps: ["Docker", "AWS EC2", "CI/CD"],
 
-  Payments: ["Stripe", "Razorpay"],
+  "Data Structures & Algorithms": [
+    "Arrays & Linked Lists",
+    "Stacks & Queues",
+    "Hash Tables & Trees",
+    "Graphs",
+  ],
 
   Tools: ["Git", "GitHub", "Postman", "Figma"],
 
@@ -129,7 +134,7 @@ export const PROJECTS = [
     category: "MOVIE DISCOVERY PLATFORM",
     title: "Netflix Clone",
     desc: "A responsive movie discovery application built with React and external movie APIs, featuring movie browsing, search functionality, trailers, and detailed movie information.",
-    tech: ["React", "Tailwind CSS", "Movie API","Cloudinary"],
+    tech: ["React", "Tailwind CSS", "Movie API", "Cloudinary"],
     liveUrl: null,
     githubUrl: "https://github.com/Muhammed-navas-MT/netflix-clone",
     size: "half",
