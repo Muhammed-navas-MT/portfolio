@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-// import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const LINKS = [
   { href: "#about", label: "About" },
@@ -12,113 +12,129 @@ const LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  // const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", fn);
-    
-    // // Check initial theme
-    // if (document.documentElement.classList.contains("dark")) {
-    //   setIsDark(true);
-    // }
-    
-    return () => window.removeEventListener("scroll", fn);
-  }, []);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
 
-  // const toggleTheme = () => {
-  //   setIsDark(!isDark);
-  //   document.documentElement.classList.toggle("dark");
-  // };
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollTo = (href: string) => {
     setOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+
+    const section = document.querySelector(href);
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
   };
 
   return (
     <>
       <motion.header
-        initial={{ y: -64, opacity: 0 }}
+        initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4"
+        transition={{ duration: 0.45 }}
+        className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4"
       >
         <nav
-          className={`w-full max-w-3xl flex items-center justify-between px-4 h-14 rounded-2xl transition-all duration-300 ${
+          className={`w-full max-w-3xl h-14 rounded-2xl flex items-center justify-between px-4 transition-all duration-300 ${
             scrolled
-  ? 'bg-white/50 backdrop-blur-2xl border border-white/20 shadow-xl'
-  : 'bg-transparent border-transparent shadow-none'
+              ? "bg-white/60 backdrop-blur-2xl border border-white/30 shadow-xl"
+              : "bg-transparent border-transparent"
           }`}
         >
           {/* Logo */}
           <button
             onClick={() => scrollTo("#hero")}
-            className="flex items-center gap-2.5 font-semibold text-sm text-zinc-900"
+            className="flex items-center gap-2.5"
           >
-            <div className="w-8 h-8 bg-zinc-900 rounded-lg flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+            <div className="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center text-xs font-bold">
               MN
             </div>
-            <span className="hidden sm:block">Muhammed Navas</span>
+
+            <span className="hidden sm:block font-semibold text-zinc-900">
+              Muhammed Navas
+            </span>
           </button>
 
-          {/* Desktop links */}
+          {/* Desktop Navigation */}
           <ul className="hidden md:flex items-center gap-1">
-            {LINKS.map((l) => (
-              <li key={l.href}>
+            {LINKS.map((link) => (
+              <li key={link.href}>
                 <button
-                  onClick={() => scrollTo(l.href)}
-                  className="text-sm text-zinc-500 hover:text-zinc-900 transition-colors px-3 py-1.5 rounded-lg hover:bg-zinc-100 font-medium"
+                  onClick={() => scrollTo(link.href)}
+                  className="px-3 py-2 rounded-lg text-sm font-medium text-zinc-600 hover:text-black hover:bg-zinc-100 transition"
                 >
-                  {l.label}
+                  {link.label}
                 </button>
               </li>
             ))}
           </ul>
 
-          {/* Theme Toggle */}
-          {/* <button
-            onClick={toggleTheme}
-            className="hidden md:flex items-center justify-center p-2 rounded-full text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition-colors dark:hover:text-zinc-100 dark:hover:bg-zinc-800"
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setOpen(!open)}
+            className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg text-zinc-700 hover:bg-zinc-100 transition"
           >
-            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+            {open ? <X size={22} /> : <Menu size={22} />}
           </button>
-
-          <div className="md:hidden flex items-center gap-2">
-            <button
-              onClick={toggleTheme}
-              className="p-2 text-zinc-600 hover:text-zinc-900 transition-colors"
-            >
-              {isDark ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-            <button
-              onClick={() => setOpen(!open)}
-              className="text-zinc-600 hover:text-zinc-900 p-1"
-            >
-              {open ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div> */}
         </nav>
       </motion.header>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            className="fixed inset-0 z-40 pt-20 bg-white/98 backdrop-blur-md flex flex-col items-center justify-center gap-6 md:hidden"
-          >
-            {LINKS.map((l) => (
-              <button
-                key={l.href}
-                onClick={() => scrollTo(l.href)}
-                className="text-2xl font-semibold text-zinc-900 hover:text-zinc-500 transition-colors dark:text-white dark:hover:text-zinc-300"
-              >
-                {l.label}
-              </button>
-            ))}
-          </motion.div>
+          <>
+            {/* Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setOpen(false)}
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 md:hidden"
+            />
+
+            {/* Menu */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.3 }}
+              className="fixed top-0 right-0 h-full w-72 bg-white shadow-2xl z-50 md:hidden"
+            >
+              <div className="flex items-center justify-between px-6 h-16 border-b">
+                <span className="font-semibold text-lg">Menu</span>
+
+                <button
+                  onClick={() => setOpen(false)}
+                  className="p-2 rounded-lg hover:bg-zinc-100"
+                >
+                  <X size={22} />
+                </button>
+              </div>
+
+              <div className="flex flex-col p-6 gap-3">
+                {LINKS.map((link) => (
+                  <button
+                    key={link.href}
+                    onClick={() => scrollTo(link.href)}
+                    className="text-left px-4 py-3 rounded-xl text-lg font-medium text-zinc-700 hover:bg-zinc-100 hover:text-black transition"
+                  >
+                    {link.label}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
